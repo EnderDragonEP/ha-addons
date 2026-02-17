@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ "$HathWorkDir" ] || HathWorkDir=${HathData:-/share/hath}
+mkdir -p "$HathWorkDir"
+
 HATHCID=$HathClientId
 HATHKEY=$HathClientKey
 EHIPBID=$StunIpbId
@@ -14,10 +17,10 @@ echo Current tunnel is $WANADDR:$WANPORT; updating H@H client settings
 [ $StunProxy ] && PROXY='-x '$StunProxy''
 
 # Save tunnel info
-touch /hath/stun.log
-[ $(wc -l </hath/stun.log) -ge 1000 ] && mv /hath/stun.log /hath/stun.log.old
-echo [$(date)] $WANADDR:$WANPORT '->' $HathPort >>/hath/stun.log
-echo $WANPORT >/hath/WANPORT
+touch "$HathWorkDir/stun.log"
+[ $(wc -l <"$HathWorkDir/stun.log") -ge 1000 ] && mv "$HathWorkDir/stun.log" "$HathWorkDir/stun.log.old"
+echo [$(date)] $WANADDR:$WANPORT '->' $HathPort >>"$HathWorkDir/stun.log"
+echo $WANPORT >"$HathWorkDir/WANPORT"
 
 # Function to talk to the RPC server
 ACTION() {

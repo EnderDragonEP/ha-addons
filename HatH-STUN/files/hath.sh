@@ -1,6 +1,8 @@
 #!/bin/sh
 
-cd /hath
+[ "$HathWorkDir" ] || HathWorkDir=${HathData:-/share/hath}
+mkdir -p "$HathWorkDir"
+cd "$HathWorkDir"
 
 # Port args
 [ $HathPort ] && HathPort='--port='$HathPort''
@@ -40,7 +42,7 @@ ActTime=$(date +%s)
 ActKey=$(echo -n "hentai@home-client_settings--$HathClientId-$ActTime-$HathClientKey" | sha1sum | cut -c -40)
 RpcServerIp=$(curl -Ls 'http://rpc.hentaiathome.net/15/rpc?clientbuild='$BUILD'&act=client_settings&add=&cid='$HathClientId'&acttime='$ActTime'&actkey='$ActKey'' | grep rpc_server_ip)
 if [ $RpcServerIp ]; then
-	echo $RpcServerIp | grep -oE '([0-9]*\.?){4}' >/hath/rpc_server_ip.txt
+	echo $RpcServerIp | grep -oE '([0-9]*\.?){4}' >"$HathWorkDir/rpc_server_ip.txt"
 	echo RPC server IP fetched; saved to rpc_server_ip.txt
 else
 	echo Failed to fetch RPC server IP; check whether the client starts

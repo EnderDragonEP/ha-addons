@@ -20,7 +20,7 @@ options:
   env_vars: []
   HathClientId: "H@H Client ID"
   HathClientKey: "H@H Client Key"
-  HathData: "/share/hath"
+  HathDataPath: "/share/hath"
   Dns: "1.1.1.1"
   Stun: true
   StunIpbId: "ipb_member_id"
@@ -32,7 +32,7 @@ schema:
         value: str?
   HathClientId: str
   HathClientKey: str
-  HathData: str
+  HathDataPath: str
   Dns: "str?"
   HathProxyType: "str?"
   HathProxyHost: "str?"

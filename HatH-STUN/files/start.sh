@@ -2,10 +2,15 @@
 
 echo "Starting..."
 
-mount | grep ' /hath ' >/dev/null || (
-echo "Work directory not mounted"
-echo "Using container layer for read/write; slower and not persistent"
-mkdir -p /hath )
+[ "$HathData" ] || HathData=/share/hath
+HathWorkDir=$HathData
+
+if echo "$HathWorkDir" | grep -q '^/share\(/.*\)\?$'; then
+	mount | grep ' /share ' >/dev/null || echo "Warning: /share is not mounted; data will not persist"
+fi
+
+mkdir -p "$HathWorkDir"
+export HathWorkDir
 
 # Only use custom directories that are actually mounted
 [ -d /hath_cache ] && export HathCache=/hath_cache && echo Custom cache dir mounted
@@ -15,14 +20,19 @@ mkdir -p /hath )
 [ -d /hath_temp ] && export HathTemp=/hath_temp  && echo Custom temp dir mounted
 
 # If HathClientId or HathClientKey is not set, read from client_login
-[ $HathData ] || HathData=/hath/data
-mkdir -p $HathData
-if [ $HathClientId ] && [ $HathClientKey ]; then
-	echo -n ''$HathClientId'-'$HathClientKey'' >$HathData/client_login
+[ "$HathData" ] || HathData="$HathWorkDir"
+[ "$HathCache" ] || HathCache="$HathWorkDir/cache"
+[ "$HathDownload" ] || HathDownload="$HathWorkDir/download"
+[ "$HathLog" ] || HathLog="$HathWorkDir/log"
+[ "$HathTemp" ] || HathTemp="$HathWorkDir/temp"
+mkdir -p "$HathData" "$HathCache" "$HathDownload" "$HathLog" "$HathTemp"
+export HathData HathCache HathDownload HathLog HathTemp
+if [ "$HathClientId" ] && [ "$HathClientKey" ]; then
+	echo -n ''$HathClientId'-'$HathClientKey'' >"$HathData/client_login"
 else
-	if [ -f $HathData/client_login ]; then
-		export HathClientId=$(awk -F '-' '{print$1}' $HathData/client_login)
-		export HathClientKey=$(awk -F '-' '{print$2}' $HathData/client_login)
+	if [ -f "$HathData/client_login" ]; then
+		export HathClientId=$(awk -F '-' '{print$1}' "$HathData/client_login")
+		export HathClientKey=$(awk -F '-' '{print$2}' "$HathData/client_login")
 	fi
 fi
 ([ $(echo $HathClientId | grep -E '^[0-9]*$') ] && [ $(echo -n $HathClientKey | wc -m) = 20 ]) || \
@@ -58,7 +68,7 @@ ADD_UPNP() {
 	$UpnpStart
 }
 
-rm -f /hath/WANPORT
+rm -f "$HathWorkDir/WANPORT"
 if [ $Stun ]; then
 	echo "STUN enabled; starting H@H client after traversal"
 	([ $(echo $StunIpbId | grep -E '^[0-9]*$') ] && [ $(echo -n $StunIpbPass | wc -m) = 32 ]) || \

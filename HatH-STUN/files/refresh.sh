@@ -1,22 +1,24 @@
 #!/bin/sh
 
+[ "$HathWorkDir" ] || HathWorkDir=${HathData:-/share/hath}
+
 [ $Stun ] || \
 (echo STUN not enabled; skipping refresh && exit 1)
 
 ps aux | grep natmap | grep -v grep || \
 (echo NATMap is not running; restart the container && exit 1)
 
-[ -f /hath/WANPORT ] || \
+[ -f "$HathWorkDir/WANPORT" ] || \
 (echo Public port not detected; check the STUN server && exit 1)
 
 echo Refreshing Hentai@Home with STUN
 
-[ $HathData ] || HathData=/hath/data
+[ $HathData ] || HathData=$HathWorkDir
 HATHCID=$HathClientId
 HATHKEY=$HathClientKey
 EHIPBID=$(awk -F '-' '{print$1}' $HathData/client_login)
 EHIPBPW=$(awk -F '-' '{print$2}' $HathData/client_login)
-WANPORT=$(cat /hath/WANPORT)
+WANPORT=$(cat "$HathWorkDir/WANPORT")
 
 [ $StunProxy ] || echo STUN proxy not set; check whether client settings can be fetched and updated
 [ $StunProxy ] && PROXY='-x '$StunProxy''

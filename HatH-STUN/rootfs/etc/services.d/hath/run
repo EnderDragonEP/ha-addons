@@ -17,7 +17,7 @@ if [ -f /data/options.json ]; then
 
 	HathClientId=$(get_opt HathClientId)
 	HathClientKey=$(get_opt HathClientKey)
-	HathData=$(get_opt HathData)
+	HathDataPath=$(get_opt HathDataPath)
 	Dns=$(get_opt Dns)
 	HathProxyType=$(get_opt HathProxyType)
 	HathProxyHost=$(get_opt HathProxyHost)
@@ -34,7 +34,7 @@ if [ -f /data/options.json ]; then
 
 	[ -n "$HathClientId" ] && export HathClientId
 	[ -n "$HathClientKey" ] && export HathClientKey
-	[ -n "$HathData" ] && export HathData="$HathData"
+	[ -n "$HathDataPath" ] && export HathDataPath="$HathDataPath"
 	[ -n "$Dns" ] && echo "nameserver $Dns" >/etc/resolv.conf
 	[ -n "$HathProxyType" ] && export HathProxyType
 	[ -n "$HathProxyHost" ] && export HathProxyHost
