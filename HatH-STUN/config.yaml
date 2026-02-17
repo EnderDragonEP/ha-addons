@@ -1,6 +1,6 @@
 name: "HatH-STUN"
 description: "A Hentai@Home client port with STUN support forked from oniicyan99/hentaiathome"
-version: "0.0.6_in-dev"
+version: "0.0.7_in-dev"
 slug: "hath-stun"
 url: "https://github.com/Oniicyan/HatH-STUN-Docker"
 startup: services
