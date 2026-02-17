@@ -35,6 +35,8 @@ StunIpbId: "ipb_member_id"
 StunIpbPass: "ipb_pass_hash"
 ```
 
+Below is a table describing the configuration options:
+
 | Option | Description |
 |--------|-------------|
 | `HathClientId` | Your Hentai@Home Client ID |
