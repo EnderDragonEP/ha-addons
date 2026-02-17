@@ -1,0 +1,53 @@
+#!/usr/bin/with-contenv sh
+
+echo "┏━━━━━━━━━━━━━━━━━━━━━━━┓"
+echo "┃ ██  ██ ▄█▀▀▀▀█ ██  ██ ┃"
+echo "┃ ██████ █  █▀▄  ██████ ┃"
+echo "┃ ██  ██ █▄ ▀▀ █ ██  ██ ┃"
+echo "┃        ▀▀▀▀▀          ┃"
+echo "┣━━━━━━━━━━━━━━━━━━━━━━━┫"
+echo "┃Hentai@Home Ver: 1.6.4 ┃"
+echo "┗━━━━━━━━━━━━━━━━━━━━━━━┛"
+
+# Load Home Assistant app options into environment variables.
+if [ -f /data/options.json ]; then
+	get_opt() {
+		jq -r --arg key "$1" '.[$key] // empty' /data/options.json
+	}
+
+	HathClientId=$(get_opt HathClientId)
+	HathClientKey=$(get_opt HathClientKey)
+	HathDataPath=$(get_opt HathDataPath)
+	Dns=$(get_opt Dns)
+	HathProxyType=$(get_opt HathProxyType)
+	HathProxyHost=$(get_opt HathProxyHost)
+	HathProxyPort=$(get_opt HathProxyPort)
+	JvmSocksHost=$(get_opt JvmSocksHost)
+	JvmSocksPort=$(get_opt JvmSocksPort)
+	StunProxy=$(get_opt StunProxy)
+	StunIpbId=$(get_opt StunIpbId)
+	StunIpbPass=$(get_opt StunIpbPass)
+	StunBindPort=$(get_opt StunBindPort)
+	StunHathPort=$(get_opt StunHathPort)
+	Upnp=$(get_opt Upnp)
+	Stun=$(get_opt Stun)
+
+	[ -n "$HathClientId" ] && export HathClientId
+	[ -n "$HathClientKey" ] && export HathClientKey
+	[ -n "$HathDataPath" ] && export HathData="$HathDataPath"
+	[ -n "$Dns" ] && echo "nameserver $Dns" >/etc/resolv.conf
+	[ -n "$HathProxyType" ] && export HathProxyType
+	[ -n "$HathProxyHost" ] && export HathProxyHost
+	[ -n "$HathProxyPort" ] && export HathProxyPort
+	[ -n "$JvmSocksHost" ] && export JvmSocksHost
+	[ -n "$JvmSocksPort" ] && export JvmSocksPort
+	[ -n "$StunProxy" ] && export StunProxy
+	[ -n "$StunIpbId" ] && export StunIpbId
+	[ -n "$StunIpbPass" ] && export StunIpbPass
+	[ -n "$StunBindPort" ] && export StunBindPort
+	[ -n "$StunHathPort" ] && export StunHathPort
+	[ "$Upnp" = "true" ] && export Upnp=1
+	[ "$Stun" = "true" ] && export Stun=1
+fi
+
+exec /files/start.sh
