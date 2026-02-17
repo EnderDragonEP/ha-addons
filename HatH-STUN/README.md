@@ -6,7 +6,7 @@ This Home Assistant app provides a convenient way to run a Hentai@Home with STUN
 
 This app is a fork of the [HatH-STUN-Docker](https://github.com/Oniicyan/HatH-STUN-Docker) project, modified to work as a Home Assistant app.
 
-Using STUN (Session Traversal Utilities for NAT) is crucial for applications like Hentai@Home that require peer-to-peer communication, as it helps devices behind firewall or router to discover their public IP address and the type of NAT they are behind. By running a STUN, this app allows your Hentai@Home client to establish direct connections and participate in the Hentai@Home network.
+Using STUN (Session Traversal Utilities for NAT) is crucial for applications like Hentai@Home that require peer-to-peer communication, as it helps devices behind firewall or router to discover their public IP address and the type of NAT they are behind. By running a STUN, it allows your Hentai@Home client to establish direct connections and participate in the Hentai@Home network.
 
 ## Installation
 
