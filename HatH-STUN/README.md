@@ -1,17 +1,12 @@
-# !!! IN EARLY DEVELOPMENT !!!
-
-**Please don’t use this yet.**
-I need to publish this app so I can test it on my own system, changes are comming in very repidly. Do not waste your time on trying this until I update the README and mark this as ready for use.
-
 # HatH-STUN Home Assistant app
 
-A Home Assistant app for running a STUN server to facilitate NAT traversal and peer-to-peer connections for Hentai@Home.
+This Home Assistant app provides a convenient way to run a Hentai@Home with STUN, allowing it to establish direct connections and participate in the Hentai@Home network even when the Home Assistant instance is behind a firewall or router.
 
 ## About
 
-This app is a fork of the [HatH-STUN-Docker](https://github.com/Oniicyan/HatH-STUN-Docker) project, modified to work as a Home Assistant app. It provides an easy way to set up and manage a Hentai@Home client with STUN support within the Home Assistant ecosystem.
+This app is a fork of the [HatH-STUN-Docker](https://github.com/Oniicyan/HatH-STUN-Docker) project, modified to work as a Home Assistant app.
 
-STUN (Session Traversal Utilities for NAT) is a protocol that helps devices behind firewall or router to discover their public IP address and the type of NAT they are behind. This is crucial for applications like Hentai@Home that require peer-to-peer communication. By running a STUN service, this app allows your Hentai@Home client to establish direct connections and participate in the Hentai@Home network.
+Using STUN (Session Traversal Utilities for NAT) is crucial for applications like Hentai@Home that require peer-to-peer communication, as it helps devices behind firewall or router to discover their public IP address and the type of NAT they are behind. By running a STUN, this app allows your Hentai@Home client to establish direct connections and participate in the Hentai@Home network.
 
 ## Installation
 
@@ -33,7 +28,7 @@ Blow is an example configuration for the app. You will need to replace the place
 ```yaml
 HathClientId: "H@H Client ID"
 HathClientKey: "H@H Client Key"
-HathData: "/share/hath"
+HathDataPath: "/share/hath"
 Dns: 1.1.1.1
 Stun: true
 StunIpbId: "ipb_member_id"
@@ -44,7 +39,7 @@ StunIpbPass: "ipb_pass_hash"
 |--------|-------------|
 | `HathClientId` | Your Hentai@Home Client ID |
 | `HathClientKey` | Your Hentai@Home Client Key |
-| `HathData` | Path to store Hentai@Home data (default: `/share/hath`) |
+| `HathDataPath` | Path to store Hentai@Home data (default: `/share/hath`) |
 | `Dns` | DNS server to use (default: `1.1.1.1`) |
 | `Stun` | Enable STUN support (default: `true`) |
 | `StunIpbId` | Your IPB member ID for STUN |
