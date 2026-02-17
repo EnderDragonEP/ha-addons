@@ -1,6 +1,6 @@
 name: "HatH-STUN"
 description: "A Hentai@Home client port with STUN support forked from oniicyan99/hentaiathome"
-version: "0.0.5_in-dev"
+version: "0.0.6_in-dev"
 slug: "hath-stun"
 url: "https://github.com/Oniicyan/HatH-STUN-Docker"
 startup: services
@@ -20,7 +20,7 @@ options:
   env_vars: []
   HathClientId: "H@H Client ID"
   HathClientKey: "H@H Client Key"
-  HathDataPath: "/share/hath"
+  HathData: "/share/hath"
   Dns: "1.1.1.1"
   Stun: true
   StunIpbId: "ipb_member_id"
@@ -32,7 +32,7 @@ schema:
         value: str?
   HathClientId: str
   HathClientKey: str
-  HathDataPath: str
+  HathData: str
   Dns: "str?"
   HathProxyType: "str?"
   HathProxyHost: "str?"

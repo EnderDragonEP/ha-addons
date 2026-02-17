@@ -33,7 +33,7 @@ Blow is an example configuration for the app. You will need to replace the place
 ```yaml
 HathClientId: "H@H Client ID"
 HathClientKey: "H@H Client Key"
-HathDataPath: "/share/hath"
+HathData: "/share/hath"
 Dns: 1.1.1.1
 Stun: true
 StunIpbId: "ipb_member_id"
@@ -44,7 +44,7 @@ StunIpbPass: "ipb_pass_hash"
 |--------|-------------|
 | `HathClientId` | Your Hentai@Home Client ID |
 | `HathClientKey` | Your Hentai@Home Client Key |
-| `HathDataPath` | Path to store Hentai@Home data (default: `/share/hath`) |
+| `HathData` | Path to store Hentai@Home data (default: `/share/hath`) |
 | `Dns` | DNS server to use (default: `1.1.1.1`) |
 | `Stun` | Enable STUN support (default: `true`) |
 | `StunIpbId` | Your IPB member ID for STUN |
