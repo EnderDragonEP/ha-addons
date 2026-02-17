@@ -1,4 +1,4 @@
-# HatH-STUN Home Assistant app
+# HatH-STUN - Home Assistant App
 
 This Home Assistant app provides a convenient way to run a Hentai@Home with STUN, allowing it to establish direct connections and participate in the Hentai@Home network even when the Home Assistant instance is behind a firewall or router.
 
